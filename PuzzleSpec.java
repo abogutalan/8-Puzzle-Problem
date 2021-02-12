@@ -84,6 +84,7 @@ public class PuzzleSpec extends Problem {
 
         if ((actions&ACTION_LEFT) != 0) {
             Game successor = new Game();
+            successor.setMove("<");
             newBlankIndex = BLANK_INDEX-2;
             successor_state = s_state;
             successor_state = swap(successor_state, BLANK_INDEX, newBlankIndex);
@@ -93,6 +94,7 @@ public class PuzzleSpec extends Problem {
 
         if ((actions&ACTION_RIGHT) != 0) {
             Game successor = new Game();
+            successor.setMove(">");
             newBlankIndex = BLANK_INDEX+2;
             successor_state = s_state;
             successor_state = swap(successor_state, BLANK_INDEX, newBlankIndex);
@@ -102,6 +104,7 @@ public class PuzzleSpec extends Problem {
         
         if ((actions&ACTION_UP) != 0) {
             Game successor = new Game();
+            successor.setMove("^");
             newBlankIndex = BLANK_INDEX-6;
             successor_state = s_state;
             successor_state = swap(successor_state, BLANK_INDEX, newBlankIndex);
@@ -111,6 +114,7 @@ public class PuzzleSpec extends Problem {
 
         if ((actions&ACTION_DOWN) != 0) {
             Game successor = new Game();
+            successor.setMove("v");
             newBlankIndex = BLANK_INDEX+6;
             successor_state = s_state;
             successor_state = swap(successor_state, BLANK_INDEX, newBlankIndex);

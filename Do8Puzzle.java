@@ -3,11 +3,8 @@ import java.io.*;
 import java.util.*;
 class Do8Puzzle extends SearchAgent {
 
-    private static Node root;
-            
-
     public static void main(String[] args) throws Exception {
-        System.out.println("   ~~~ Do8Puzzle ~~~");
+        System.out.println(" ~~~~~~~~~~ Do8Puzzle ~~~~~~~~~~ \n");
 
         // reading problem definition from txt file.
         File file = new File(args[0]);
@@ -39,21 +36,20 @@ class Do8Puzzle extends SearchAgent {
         problem.setGoalState(goalState);
         problem.setStrategy("Strategy: A* tree search");
 
-        // LinkedList<Game> successors = problem.getSuccessor(initialState);
 
         Do8Puzzle puzzle = new Do8Puzzle();
         puzzle.setProblem(problem);
+        System.out.println(" ~~~~~~~~~~ Insert Fringe ~~~~~~~~~~ \n");
         puzzle.search();
 
 
-        System.out.println("\n\n ~~~~~ Show Tree ~~~~~ ");
+        System.out.println("\n\n ~~~~~~~~~~ Show Tree ~~~~~~~~~~ \n");
         puzzle.showTree();
 
-        System.out.println("\n ~~~~~ Solution to 8 Puzzle ~~~~~ ");
+        System.out.println("\n ~~~~~~~~~~ Solution to 8 Puzzle ~~~~~~~~~~ \n");
         puzzle.showSolution();
                 
 
-        // root = new Node(initialState);
         
     }
 
@@ -86,7 +82,7 @@ class Do8Puzzle extends SearchAgent {
                     if(this.tree.get(j).depth == depth + 1) {
     
                         int p_index = this.tree.indexOf(this.tree.get(j).parent);
-                        System.out.print("  "+p_index+ "     ");
+                        System.out.print("  "+p_index+ "        ");
                         
                     }
                 }
@@ -99,7 +95,10 @@ class Do8Puzzle extends SearchAgent {
                         if(this.tree.get(j).depth == depth + 1) {
         
                             ((Game)this.tree.get(j).getState()).showPart(i);
-                            System.out.print(" | ");
+                            
+                            if(i==0) System.out.print(" (g" + ((Game)this.tree.get(j).getState()).get_g_of_n() + ") ");
+                            else if(i==1) System.out.print(" (h" + ((Game)this.tree.get(j).getState()).getHeuristic() + ") ");
+                            else if(i==2) System.out.print(" (f" + ((Game)this.tree.get(j).getState()).get_f_of_n() + ") ");
                             
                         }
                         
@@ -111,7 +110,7 @@ class Do8Puzzle extends SearchAgent {
                 for(int j = 1; j < this.tree.size(); j++){
                     if(this.tree.get(j).depth == depth + 1) {
     
-                        System.out.print("  " + j + "     ");
+                        System.out.print("  " + j + "        ");
                         
                     }
                 }
@@ -128,31 +127,26 @@ class Do8Puzzle extends SearchAgent {
         int current_heuristic = ((Game)arg0.getState()).getHeuiristicValue(this.problem.goalState);
         int g_val = arg0.pathCost;
         int f_val = current_heuristic + g_val;
-        // System.out.println("current values: heuristic,"+current_heuristic+" / g,"+g_val+" / f,"+f_val);
+        ((Game)arg0.getState()).setHeuristic(current_heuristic);
+        ((Game)arg0.getState()).set_g_of_n(g_val);
+        ((Game)arg0.getState()).set_f_of_n(f_val);
         
         if(arg1.isEmpty()) {
-            // System.out.println("test root");
 
             arg1.addFirst(arg0);
         } 
         
         else {
-            // arg1.addLast(arg0);
-            // System.out.println("test size of list: "+arg1.size());
 
             int heuristic = ((Game)arg1.getFirst().getState()).getHeuiristicValue(this.problem.goalState);
             int g = arg1.getFirst().pathCost;
             int f = heuristic + g;
-            // System.out.println("head values: heuristic,"+heuristic+" / g,"+g+" / f,"+f);
             if(f_val <= f){
-                // System.out.println("f_val: "+f_val);
                 arg1.addFirst(arg0);
             }
 
         }
         
-   
-
 
     }
 
