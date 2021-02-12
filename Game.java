@@ -16,11 +16,20 @@ class Game extends ObjectPlus {
         this.state = currentState;
     }
 
+    String getMove() {
+        return this.move;
+    }
+    
+    void setMove(String direction) {
+        this.move = direction;
+    }
+
     // needs to be admissable (use misplaced tile function)
-    int getHeuiristicValue(String goalState) {
+    int getHeuiristicValue(ObjectPlus goalState) {
+        String goal = ((Game)goalState).getState();
         int h_of_n = 0;
         for (int i = 0; i < this.state.length(); i++) {
-            if(this.state.charAt(i) != goalState.charAt(i)) {
+            if(this.state.charAt(i) != goal.charAt(i)) {
                 h_of_n++;
             }
         }
@@ -37,7 +46,7 @@ class Game extends ObjectPlus {
     }
 
     void show() {
-        System.out.println(this.state);
+        System.out.print(this.state);
     }
 
     void showPart(int arg0) {
@@ -46,7 +55,7 @@ class Game extends ObjectPlus {
             return;
         }
         int index = arg0*6;
-        for (int i = index; i < index+6; i++) {
+        for (int i = index; i < index+5; i++) {
             System.out.print(this.state.charAt(i));
         }
         

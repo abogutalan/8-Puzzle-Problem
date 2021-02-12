@@ -28,7 +28,7 @@ abstract class SearchAgent {
             System.out.println("  Fringe size=" + fringe.size());
             Node n = (Node) fringe.removeFirst(); // node to visit
             System.out.print("Visit");
-            n.show(); // show node
+            n.show(); // show node  ==> node at depth " + depth + " of state:
             ObjectPlus nodeState = n.getState();
             if (problem.isGoalState(nodeState)) {
                 solution = n.getPathFromRoot();

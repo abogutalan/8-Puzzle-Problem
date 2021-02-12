@@ -7,8 +7,7 @@ class Node {
     Node parent;
     ObjectPlus state;
     int depth;
-    int pathCost;
-    // path cost from root
+    int pathCost; // path cost from root
     Node child[] = null;
 
     // useful for tree printing

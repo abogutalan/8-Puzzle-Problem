@@ -117,14 +117,14 @@ public class PuzzleSpec extends Problem {
             successor.setState(successor_state);
             successors.addLast(successor);
         }
-
-        for(int k=0;k<successors.size();k++){
-            ((Game)successors.get(k)).show();
+        
+        // print successors list
+        // for(int k=0;k<successors.size();k++){
+        //     ((Game)successors.get(k)).show();
             
-        }
+        // }
 
-            
-        return new LinkedList<>();
+        return successors;
     }
 
     // Test if state s is a goal.
