@@ -56,9 +56,26 @@ class Do8Puzzle extends SearchAgent {
     // abstract classes
     
     void showSolution() {
+        ArrayList<String> sequenceOfSolution = new ArrayList<>();
         for(int i = 0; i < this.solution.size(); i++){
             ((Node)this.solution.get(i)).show();
+            sequenceOfSolution.add(((Game)((Node)this.solution.get(i)).state).getMove());
         }
+        String solution = "( ";
+        for(int j = 0; j < sequenceOfSolution.size(); j++){
+            String move = sequenceOfSolution.get(j);
+            if (move != null) {
+                if(move.equals("<")) solution += "Left";
+                else if(move.equals(">")) solution += "Right";
+                else if(move.equals("^")) solution += "Up";
+                else if(move.equals("v")) solution += "Down";
+
+                if (j != sequenceOfSolution.size()-1) solution += ", ";
+            }
+            
+            
+        }
+        System.out.println("Action sequence for solution: \n" + solution + " )");
 
     }
   
